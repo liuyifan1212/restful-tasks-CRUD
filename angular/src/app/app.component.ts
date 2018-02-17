@@ -1,17 +1,33 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { HttpService } from './http.service';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+  title = 'MEAN';
+  tasks = [];
+  //a : string
+  b = [];
 
-@Injectable()
-export class HttpService {
-
-  constructor(private _http: HttpClient) {
-    //this.getTasks();
-    //this.getOne();
-   }
-
-  getTasks(){
-    //let tempObservable = this._http.get('/tasks');
-    //tempObservable.subscribe(data => console.log("Got our tasks!", data));
-    return this._http.get('/tasks')
- }
+  constructor(private _httpService: HttpService){}
+  ngOnInit(){
+    this.getTaskFromService()
+    
+  }
+  getTaskFromService(){
+    let observable = this._httpService.getTasks()
+    observable.subscribe(data =>{
+      //console.log("Congrats!got your data!", data)
+      this.tasks = data['tasks'];
+     // console.log(data.data)
+      this.b = data.data
+      //console.log(data.data[0].description)
+     // this.a = data.data[0].description
+    
+    })
+  }
+ 
 }
+
