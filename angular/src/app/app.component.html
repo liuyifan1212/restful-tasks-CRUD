@@ -1,11 +1,12 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>Restful Tasks API</h1>
-  <br>
-  <br>
-  <h1>All the tasks:</h1>
-  <p *ngFor="let i of b">{{i.title}} - {{i.description}}</p>
+  <button (click)="onButtonClick()" >Click to get all tasks!</button>
+  <p *ngFor="let i of d">{{i.title}} - {{i.description}}</p>
+  
+
   <br>
   <br>
   <h1>The third task:</h1>
-  <p>{{b[2].title}} - {{b[2].description}}</p>
+  <p>{{b}} - {{c}}</p>
+  
