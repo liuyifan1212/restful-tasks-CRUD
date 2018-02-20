@@ -1,12 +1,59 @@
+
+
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>Restful Tasks API</h1>
-  <button (click)="onButtonClick()" >Click to get all tasks!</button>
-  <p *ngFor="let i of d">{{i.title}} - {{i.description}}</p>
-  
 
-  <br>
-  <br>
-  <h1>The third task:</h1>
-  <p>{{b}} - {{c}}</p>
-  
+  <form (submit)="onSubmit()">
+        <!-- use the json pipe to see how newTask changes in real time -->
+        <p> {{ newTask | json }} </p>
+       Title: <input type="text" name="newTask.title" [(ngModel)]="newTask.title" />
+       Description:<input type="text" name="newTask.description" [(ngModel)]="newTask.description" />
+        <input type="submit" value="Create Task" />
+    </form>
+    
+</div>
+<div class="left">
+  <h1 >Task List</h1>
+  <div class = 'taskList' *ngFor="let i of data" style="text-align:center">
+    <h3>{{i.title}}</h3>
+    <p> {{i.description}}</p>
+    <p> {{i._id}}</p>
+    <button (click)='updateTask(i)'>EDIT</button>
+    <button (click)='deleteTask(i._id)'>DELETE</button>
+ 
+  </div>
+</div>
+<div class="right"  *ngIf='newTask2'>
+  <h3>Edit a task</h3>
+  <form (submit)="updateSubmit()">
+          <p> {{ newTask2 | json }} </p>
+         Title: <input type="text" name="newTask.title" [(ngModel)]="newTask2.title" /><br>
+         Description:<input type="text" name="newTask.description" [(ngModel)]="newTask2.description" /><br>
+          <input type="submit" value="EDIT" />
+  </form>
+</div>
+
+
+
+
+<style>
+  .taskList{
+    width:300px;
+    height: 150px;
+    border: 1px solid black;
+    margin: 5px;
+  }
+  .left{
+    width:350px;
+    display: inline-block
+  }
+  .right{
+    width:350px;
+    height: 200px;
+    display: inline-block;
+    border: 1px solid black;
+    margin: 20px;
+    vertical-align: top;
+  }
+</style>
